@@ -304,7 +304,7 @@ void IRAM_ATTR NetworkHandlingLoopEntry(void *)
         #if ENABLE_WIFI
             EVERY_N_SECONDS(2)
             {
-                if (WiFi.isConnected() == false && ConnectToWiFi(10) == false)
+                if (!WiFi.isConnected() && !ConnectToWiFi(10))
                 {
                     debugE("Cannot Connect to Wifi!");
                     #if WAIT_FOR_WIFI
@@ -357,7 +357,7 @@ void IRAM_ATTR SocketServerTaskEntry(void *)
 
 inline void CheckHeap()
 {
-    if (false == heap_caps_check_integrity_all(true))
+    if (!heap_caps_check_integrity_all(true))
     {
         throw runtime_error("Heap FAILED checks!");
     }
@@ -681,7 +681,7 @@ void setup()
 
 #if WAIT_FOR_WIFI
     debugI("Calling ConnectToWifi()\n");
-    if (false == ConnectToWiFi(99))
+    if (!ConnectToWiFi(99))
     {
         debugI("Unable to connect to WiFi, but must have it, so rebooting...\n");
         throw runtime_error("Unable to connect to WiFi, but must have it, so rebooting");

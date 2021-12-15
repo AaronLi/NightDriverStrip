@@ -179,7 +179,7 @@ bool ConnectToWiFi(uint cRetries)
     }
 #endif
 
-    if (false == WiFi.isConnected())
+    if (!WiFi.isConnected())
     {
         debugI("Giving up on WiFi\n");
         return false;
@@ -189,7 +189,7 @@ bool ConnectToWiFi(uint cRetries)
     // Start listening for incoming data
     debugI("Starting/restarting Socket Server...");
     g_SocketServer.release();
-    if (false == g_SocketServer.begin())
+    if (!g_SocketServer.begin())
         throw runtime_error("Could not start socket server!");
 
     debugI("Socket server started.");

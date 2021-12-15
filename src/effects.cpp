@@ -598,6 +598,6 @@ DRAM_ATTR LEDStripEffect * AllEffects[] =
 void InitEffectsManager()
 {
     g_pEffectManager = make_unique<EffectManager>(AllEffects, ARRAYSIZE(AllEffects), g_pStrands);
-    if (false == g_pEffectManager->Init())
+    if (!g_pEffectManager->Init())
         throw runtime_error("Could not initialize effect manager");
 }

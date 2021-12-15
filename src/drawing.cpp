@@ -169,10 +169,10 @@ void IRAM_ATTR DrawLoopTaskEntry(void *)
                 // Pull buffers out of the queue.  Changint the 'while' to an 'if' would cause it to draw every frame if it got behind, but when
                 // written as 'while' it will pull frames until it gets one that is current.
 
-                if (false == g_apBufferManager[iChannel]->IsEmpty())
+                if (!g_apBufferManager[iChannel]->IsEmpty())
                 {
                     shared_ptr<LEDBuffer> pBuffer;
-                    if (NTPTimeClient::HasClockBeenSet() == false)
+                    if (!NTPTimeClient::HasClockBeenSet())
                     {
                         pBuffer = g_apBufferManager[iChannel]->GetOldestBuffer();
                     }
@@ -193,7 +193,7 @@ void IRAM_ATTR DrawLoopTaskEntry(void *)
                     }
                 }
                                 
-                if (false == g_apBufferManager[iChannel]->IsEmpty())
+                if (!g_apBufferManager[iChannel]->IsEmpty())
                 {
                     auto pOldest = g_apBufferManager[iChannel]->PeekOldestBuffer();
                     auto pNewest = g_apBufferManager[iChannel]->PeekNewestBuffer();                    

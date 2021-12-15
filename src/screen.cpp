@@ -116,7 +116,7 @@ void IRAM_ATTR UpdateScreen()
         Screen::setCursor(0, 0);
         Screen::println(szBuffer);
 
-        if (WiFi.isConnected() == false)
+        if (!WiFi.isConnected())
         {
             snprintf(szBuffer, ARRAYSIZE(szBuffer), "No Wifi Connection");
         }
@@ -300,7 +300,7 @@ void IRAM_ATTR UpdateScreen()
             snprintf(szBuffer, ARRAYSIZE(szBuffer), "%s:%dx%d %dK %03dB", FLASH_VERSION_NAME, NUM_CHANNELS, STRAND_LEDS, ESP.getFreeHeap() / 1024, brite);
             Screen::drawString(szBuffer, 0, 0); // write something to the internal memory
 
-            if (WiFi.isConnected() == false)
+            if (!WiFi.isConnected())
             {
                 snprintf(szBuffer, ARRAYSIZE(szBuffer), g_pEffectManager ? g_pEffectManager->GetCurrentEffectName() : "N/C");
             }
